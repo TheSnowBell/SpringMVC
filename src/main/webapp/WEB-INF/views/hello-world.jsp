@@ -8,5 +8,13 @@
 </head>
 <body>
 <h1>HELLO-WORLD</h1>
+<form action="produtos/formulario">
+
+<div>
+			<input type="submit" value="Enviar">
+		</div>
+
+</form>
+
 </body>
 </html>
