@@ -1,5 +1,7 @@
 package loja.daos;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -15,5 +17,9 @@ public class ProdutoDAO {
 	
 	public void save(Produto produto) {
 		entityManager.persist(produto);
+	}
+	
+	public List<Produto> lista(){
+		return entityManager.createQuery("SELECT DISTINCT(p) FROM Produto p JOIN FETCH p.precos", Produto.class ).getResultList();
 	}
 }

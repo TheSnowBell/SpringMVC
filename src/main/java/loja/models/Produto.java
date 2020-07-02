@@ -1,5 +1,9 @@
 package loja.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +23,9 @@ public class Produto {
 	private String titulo;
 	
 	private int paginas;
+	
+	@ElementCollection
+	private List<Preco> precos = new ArrayList<Preco>();
 	
 	public String getDescricao() {
 		return descricao;
@@ -52,10 +59,12 @@ public class Produto {
 		this.id = id;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", descricao=" + descricao + ", titulo=" + titulo + ", paginas=" + paginas + "]";
+	public List<Preco> getPrecos() {
+		return precos;
 	}
 
+	public void setPrecos(List<Preco> precos) {
+		this.precos = precos;
+	}
 	
 }
