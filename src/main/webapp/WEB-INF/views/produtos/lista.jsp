@@ -17,6 +17,7 @@
 		<c:forEach items="${produtos}" var="produto">
 			<tr>
 				<td>${produto.titulo}</td>
+				
 				<td>
 					<c:forEach items="${produto.precos}" var="preco">
 						[${preco.valor} - ${preco.bookType}]

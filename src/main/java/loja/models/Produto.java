@@ -1,6 +1,6 @@
 package loja.models;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.ElementCollection;
@@ -9,6 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 public class Produto {
@@ -18,14 +22,20 @@ public class Produto {
 	private Integer id;
 	
 	@Lob
+	@NotBlank
 	private String descricao;
 	
+	@NotBlank
 	private String titulo;
 	
+	@Min(30)
 	private int paginas;
 	
 	@ElementCollection
-	private List<Preco> precos = new ArrayList<Preco>();
+	private List<Preco> precos;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private Calendar dataLancamento;
 	
 	public String getDescricao() {
 		return descricao;
@@ -65,6 +75,14 @@ public class Produto {
 
 	public void setPrecos(List<Preco> precos) {
 		this.precos = precos;
+	}
+
+	public Calendar getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(Calendar dataLancamento) {
+		this.dataLancamento = dataLancamento;
 	}
 	
 }

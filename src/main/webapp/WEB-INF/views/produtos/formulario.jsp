@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 
 <!DOCTYPE html>
 <html>
@@ -9,33 +12,44 @@
 </head>
 <body>
 
-	<form method="post" action="<c:url value="/produtos" />">
+
+	<form:form action="${spring:mvcUrl('PC#cadastrar').build()}" method="post" commandName="produto">
+
 		<div>
-			<label for="titulo">Titulo</label> <input type="text" name="titulo"
-				id="titulo" />
+			<label for="titulo">Titulo</label>
+			<form:input path="titulo" />
+			<form:errors path="titulo" />
 		</div>
+		
 		<div>
 			<label for="descricao">Descrição</label>
-			<textarea rows="10" cols="20" name="descricao" id="descricao"></textarea>
+			<form:textarea path="descricao" rows="10" cols="20"/>
+			<form:errors path="descricao"/>
 		</div>
 		<div>
-			<label for="paginas">Número de paginas</label> <input type="text"
-				name="paginas" id="paginas" />
+			<label for="paginas">Número de paginas</label> 
+			<form:input path="paginas"/>
+			<form:errors path="paginas"/>
+		</div>
+
+		<div>
+			<label for="dataLancamento">Data de lançamento</label>
+			<input type="date" name="dataLancamento"/>
+			<form:errors path="dataLancamento"/>
 		</div>
 
 		<c:forEach items="${types}" var="bookType" varStatus="status">
 			<div>
 				<label for="preco_${bookType}">${bookType}</label> 
-				<input type="text" name="precos[${status.index}].valor"	id="preco_${bookType}" /> 
-				<input type="hidden" name="precos[${status.index}].bookType" value="${bookType}" />
+				<form:input path="precos[${status.index}].valor" />
+				<form:hidden path="precos[${status.index}].bookType" value="${bookType}"/>
 			</div>
 		</c:forEach>
-		
+
 		<div>
 			<input type="submit" value="Enviar">
 		</div>
 
-	</form>
-
+	</form:form>
 </body>
 </html>
