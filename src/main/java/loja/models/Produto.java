@@ -20,51 +20,53 @@ public class Produto {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Lob
 	@NotBlank
 	private String descricao;
-	
+
 	@NotBlank
 	private String titulo;
-	
+
 	@Min(30)
 	private int paginas;
-	
+
 	@ElementCollection
 	private List<Preco> precos;
-	
+
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Calendar dataLancamento;
-	
+
+	private String summaryPath;
+
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	public String getTitulo() {
 		return titulo;
 	}
-	
+
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
+
 	public int getPaginas() {
 		return paginas;
 	}
-	
+
 	public void setPaginas(int paginas) {
 		this.paginas = paginas;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -84,5 +86,13 @@ public class Produto {
 	public void setDataLancamento(Calendar dataLancamento) {
 		this.dataLancamento = dataLancamento;
 	}
-	
+
+	public String getSummaryPath() {
+		return summaryPath;
+	}
+
+	public void setSummaryPath(String summaryPath) {
+		this.summaryPath = summaryPath;
+	}
+
 }

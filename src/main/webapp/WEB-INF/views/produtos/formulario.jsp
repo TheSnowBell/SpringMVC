@@ -13,7 +13,10 @@
 <body>
 
 
-	<form:form action="${spring:mvcUrl('PC#cadastrar').build()}" method="post" commandName="produto">
+	<form:form 	action="${spring:mvcUrl('PC#cadastrar').build()}" 
+			 	method="post" 
+			 	commandName="produto" 
+			 	enctype="multipart/form-data">
 
 		<div>
 			<label for="titulo">Titulo</label>
@@ -45,6 +48,12 @@
 				<form:hidden path="precos[${status.index}].bookType" value="${bookType}"/>
 			</div>
 		</c:forEach>
+
+		<div>
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary"/>
+			<form:errors path="summaryPath"/>
+		</div>
 
 		<div>
 			<input type="submit" value="Enviar">
