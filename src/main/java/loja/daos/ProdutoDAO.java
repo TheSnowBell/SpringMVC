@@ -20,6 +20,14 @@ public class ProdutoDAO {
 	}
 	
 	public List<Produto> lista(){
+		/*A "fetch" join allows associations or collections of values to be initialized along with their parent objects using a single select.*/
 		return entityManager.createQuery("SELECT DISTINCT(p) FROM Produto p JOIN FETCH p.precos", Produto.class ).getResultList();
 	}
+	
+	public Produto find(Integer id) {
+		/*A "fetch" join allows associations or collections of values to be initialized along with their parent objects using a single select.*/
+		return entityManager.createQuery("SELECT p FROM Produto p JOIN FETCH p.precos WHERE p.id = :id", Produto.class)
+									.setParameter("id", id).getSingleResult();
+	}
+	
 }

@@ -1,5 +1,6 @@
 package loja.models;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -95,4 +96,8 @@ public class Produto {
 		this.summaryPath = summaryPath;
 	}
 
+	public BigDecimal precoDe(BookType bookType) {
+		return precos.stream().filter(preco -> preco.getBookType().equals(bookType)).findFirst().get().getValor();
+	}
+	
 }

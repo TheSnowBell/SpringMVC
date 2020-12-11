@@ -16,9 +16,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import loja.controllers.HomeController;
 import loja.daos.ProdutoDAO;
 import loja.infra.FileSaver;
+import loja.models.CarrinhoDeCompra;
 
 @EnableWebMvc
-@ComponentScan(basePackageClasses = {HomeController.class, ProdutoDAO.class, FileSaver.class})
+@ComponentScan(basePackageClasses = {HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoDeCompra.class})
 public class AppWebConfiguration {
 	
 	@Bean
