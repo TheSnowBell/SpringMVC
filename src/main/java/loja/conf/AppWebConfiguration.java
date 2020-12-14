@@ -1,5 +1,7 @@
 package loja.conf;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.cache.CacheManager;
@@ -13,10 +15,13 @@ import org.springframework.format.datetime.DateFormatter;
 import org.springframework.format.datetime.DateFormatterRegistrar;
 import org.springframework.format.support.DefaultFormattingConversionService;
 import org.springframework.format.support.FormattingConversionService;
+import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
+import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.common.cache.CacheBuilder;
@@ -25,12 +30,13 @@ import loja.controllers.HomeController;
 import loja.daos.ProdutoDAO;
 import loja.infra.FileSaver;
 import loja.models.CarrinhoDeCompra;
+import loja.viewresolver.JsonViewResolver;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = {HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoDeCompra.class})
 @EnableCaching
 public class AppWebConfiguration {
-	
+
 	@Bean
 	public InternalResourceViewResolver internalResourceViewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -38,7 +44,7 @@ public class AppWebConfiguration {
 		resolver.setSuffix(".jsp");
 		return resolver;
 	}
-	
+
 	/*Um detalhe muito importante,o nome do método deve ser messageSource. 
 	 * O Spring MVC vai procurar por um Bean registrado com esse nome, para que possa carregar as mensagens.
 	 * Ou @Bean(name="messageSource")*/
@@ -50,17 +56,17 @@ public class AppWebConfiguration {
 		bundle.setCacheSeconds(1);
 		return bundle;
 	}
-	
+
 	@Bean
 	public FormattingConversionService mvcConversionService() {
 		DefaultFormattingConversionService conversionService = new DefaultFormattingConversionService(true);
-		
+
 		DateFormatterRegistrar registrar = new DateFormatterRegistrar();
 		registrar.setFormatter(new DateFormatter("yyyy-MM-dd"));
 		registrar.registerFormatters(conversionService);
 		return conversionService;
 	}
-	
+
 	@Bean
 	public MultipartResolver multipartResolver() {
 		return new StandardServletMultipartResolver();
@@ -70,7 +76,7 @@ public class AppWebConfiguration {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-	
+
 	@Bean
 	public CacheManager cacheManager() {
 		CacheBuilder<Object, Object> builder  = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(5, TimeUnit.MINUTES);
@@ -78,5 +84,20 @@ public class AppWebConfiguration {
 		cacheManager.setCacheBuilder(builder);
 		return cacheManager;
 	}
-	
+
+	@Bean
+	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+		List<ViewResolver> resolvers = new ArrayList<ViewResolver>();
+		resolvers.add(internalResourceViewResolver());
+		resolvers.add(new JsonViewResolver());
+
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		resolver.setViewResolvers(resolvers);
+		resolver.setContentNegotiationManager(manager);
+		return resolver;
+
+	}
+
+
+
 }
