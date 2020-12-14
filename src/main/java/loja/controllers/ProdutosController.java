@@ -4,6 +4,8 @@ import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +39,7 @@ public class ProdutosController {
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
+	@CacheEvict(value = "livros", allEntries = true)
 	public ModelAndView cadastrar(MultipartFile summary, 
 			@Valid Produto produto, 
 			BindingResult bindingResult ,
@@ -56,6 +59,7 @@ public class ProdutosController {
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
+	@Cacheable(value = "livros")
 	public ModelAndView lista() {
 		ModelAndView modelView = new ModelAndView("produtos/lista");
 		modelView.addObject("produtos", produtoDAO.lista());

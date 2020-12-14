@@ -1,5 +1,10 @@
 package loja.conf;
 
+import java.util.concurrent.TimeUnit;
+
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.guava.GuavaCacheManager;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -14,6 +19,8 @@ import org.springframework.web.multipart.support.StandardServletMultipartResolve
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import com.google.common.cache.CacheBuilder;
+
 import loja.controllers.HomeController;
 import loja.daos.ProdutoDAO;
 import loja.infra.FileSaver;
@@ -21,6 +28,7 @@ import loja.models.CarrinhoDeCompra;
 
 @EnableWebMvc
 @ComponentScan(basePackageClasses = {HomeController.class, ProdutoDAO.class, FileSaver.class, CarrinhoDeCompra.class})
+@EnableCaching
 public class AppWebConfiguration {
 	
 	@Bean
@@ -61,6 +69,14 @@ public class AppWebConfiguration {
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
+	}
+	
+	@Bean
+	public CacheManager cacheManager() {
+		CacheBuilder<Object, Object> builder  = CacheBuilder.newBuilder().maximumSize(100).expireAfterAccess(5, TimeUnit.MINUTES);
+		GuavaCacheManager cacheManager = new GuavaCacheManager();
+		cacheManager.setCacheBuilder(builder);
+		return cacheManager;
 	}
 	
 }
