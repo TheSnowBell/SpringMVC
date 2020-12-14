@@ -15,14 +15,14 @@
 <body class="produto">
 
 	<header id="layout-header">
-		<div class="clearfix container">
-			<a href="/" id="logo"> </a>
+		<div >
 			<div id="header-content">
 				<nav id="main-nav">
-					<ul class="clearfix">
+					<ul>
 
-						<li><a href=""
-							rel="nofollow">Seu carrinho (${carrinhoDeCompra.quantidadeTotalDeItensNoCarrinho}) </a></li>
+						<li>
+							<a href="" rel="nofollow">Seu carrinho (${carrinhoDeCompra.quantidadeTotalDeItensNoCarrinho}) </a>
+						</li>
 
 					</ul>
 				</nav>
@@ -30,78 +30,60 @@
 		</div>
 	</header>
 
-	<article id="${produto.titulo}"
-		itemtype="http://schema.org/Book">
-		<header id="produto-highlight" class="clearfix">
-			<div id="produto-overview" class="container">
-				<img itemprop="image" width="280px" height="395px" src=''
-					class="produto-featured-image" alt="${produto.titulo}">
-				<h1 class="produto-title" itemprop="name">${produto.titulo}</h1>
-				<p class="produto-author">
-					<span class="produto-author-link"> ${produto.titulo} </span>
+	<article id="${produto.titulo}">
+		<header id="produto-highlight">
+			<div id="produto-overview">
+				<img itemprop="image" width="280px" height="395px" src='' alt="${produto.titulo}">
+				<h1 itemprop="name">${produto.titulo}</h1>
+				<p>
+					<span> ${produto.titulo} </span>
 				</p>
 
-				<p itemprop="description" class="book-description">
-					${produto.descricao} Veja o <a
-						href="<c:url value='/${produto.summaryPath}'/>" target="_blank">sumário</a>
+				<p itemprop="description">
+					${produto.descricao} Veja o <a href="<c:url value='/${produto.summaryPath}'/>" target="_blank">sumário</a>
 					completo do livro!
 				</p>
 			</div>
 		</header>
 
 
-		<section class="buy-options clearfix">
-			<form action="<c:url value="/shopping"/>" method="post"
-				class="container">
+		<section>
+			<form action="<c:url value="/shopping"/>" method="post">
 				<input type="hidden" value="${produto.id}" name="produtoId" />
-				<ul id="variants" class="clearfix">
+				<ul id="variants" >
 					<c:forEach items="${produto.precos}" var="preco">
-						<li class="buy-option"><input type="radio" name="bookType"
-							class="variant-radio" id="${produto.id}-${preco.bookType}"
-							value="${preco.bookType}"
-							${preco.bookType.name() == 'COMBO' ? 'checked' : ''}> <label
-							class="variant-label" for="${produto.id}-${preco.bookType}">
-								${preco.bookType} </label>
-							<p class="variant-preco">${preco.valor}</p></li>
+						<li>
+							<input type="radio" name="bookType" id="${produto.id}-${preco.bookType}" value="${preco.bookType}" ${preco.bookType.name() == 'COMBO' ? 'checked' : ''}> 
+							<label for="${produto.id}-${preco.bookType}"> ${preco.bookType} </label>
+							<p>${preco.valor}</p>
+						</li>
 					</c:forEach>
 
 				</ul>
 
-				<input type="submit" class="submit-image icon-basket-alt"
-					alt="Compre agora" title="Compre agora '${produto.titulo}'!"
-					value="comprar" />
-
+				<input type="submit" alt="Compre agora" title="Compre agora '${produto.titulo}'!" value="comprar" />
 			</form>
 
 		</section>
 
 		<div class="container">
 
-			<section class="author produto-detail" itemprop="author"
-				itemtype="http://schema.org/Person">
-				<h2 class="section-title" itemprop="name">${produto.titulo}</h2>
+			<section itemprop="author">
+				<h2 itemprop="name">${produto.titulo}</h2>
 				<span itemprop="description">
-
-					<p class="book-description">${produto.descricao}</p>
-
+					${produto.descricao}
 				</span>
 			</section>
 
-			<section class="data produto-detail">
-				<h2 class="section-title">Dados do livro:</h2>
+			<section>
+				<h2>Dados do livro:</h2>
 				<p>
 					Número de paginas: <span itemprop="numberOfPages">${produto.paginas}</span>
 				</p>
 
-
 				<p></p>
-				<p>
-					Encontrou um erro? <a href='/submissao-errata' target='_blank'>Submeta
-						uma errata</a>
-				</p>
 			</section>
 		</div>
-
 
 	</article>
 

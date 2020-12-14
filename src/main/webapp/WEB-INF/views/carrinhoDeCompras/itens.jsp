@@ -15,27 +15,25 @@
 	<table id="cart-table">
 		<thead>
 			<tr>
-				<th class="cart-img-col"></th>
-				<th width="65%">Item</th>
-				<th width="10%">Preço</th>
-				<th width="10%">Quantidade</th>
-				<th width="10%">Total</th>
-				<th width="5%"></th>
+				<th></th>
+				<th>Item</th>
+				<th>Preço</th>
+				<th>Quantidade</th>
+				<th>Total</th>
+				<th></th>
 			</tr>
 		</thead>
 
 		<tbody>
 			<c:forEach items="${carrinhoDeCompra.list}" var="item">
 				<tr>
-					<td class="cart-img-col"><img src=""
-						alt="${item.produto.titulo}" /></td>
-					<td class="item-titulo">${item.produto.titulo} - ${item.bookType}
+					<td><img src=""	alt="${item.produto.titulo}" /></td>
+					<td>${item.produto.titulo} - ${item.bookType}</td>
+					<td>${item.preco}</td>
+					<td>
+						<input type="number" min="0" readonly="readonly" value="${carrinhoDeCompra.getQuantidadeDoItem(item)}">
 					</td>
-					<td class="numeric-cell">${item.preco}</td>
-					<td class="quantity-input-cell"><input type="number" min="0"
-						readonly="readonly" value="${carrinhoDeCompra.getQuantidadeDoItem(item)}">
-					</td>
-					<td class="numeric-cell">${carrinhoDeCompra.getValorTotalDoItem(item)}</td>
+					<td>${carrinhoDeCompra.getValorTotalDoItem(item)}</td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -44,11 +42,10 @@
 				<td colspan="2">
 					<form action="${spring:mvcUrl('PC#checkout').build()}"
 						method="post">
-						<input type="submit" class="checkout" name="checkout"
-							value="Finalizar compra " id="checkout" />
+						<input type="submit" name="checkout" value="Finalizar compra" id="checkout" />
 					</form>
 				</td>
-				<td class="numeric-cell">${carrinhoDeCompra.total}</td>
+				<td>${carrinhoDeCompra.total}</td>
 				<td></td>
 			</tr>
 		</tfoot>
