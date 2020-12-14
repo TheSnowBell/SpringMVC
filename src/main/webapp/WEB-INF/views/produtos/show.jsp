@@ -1,14 +1,9 @@
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!doctype html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="pt"><![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" lang="pt"><![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9" lang="pt"><![endif]-->
-<!--[if gt IE 8]><!-->
 <html class="no-js" lang="pt">
-<!--<![endif]-->
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -35,7 +30,7 @@
 		</div>
 	</header>
 
-	<article id="${produto.titulo}" itemscope
+	<article id="${produto.titulo}"
 		itemtype="http://schema.org/Book">
 		<header id="produto-highlight" class="clearfix">
 			<div id="produto-overview" class="container">
@@ -82,7 +77,7 @@
 
 		<div class="container">
 
-			<section class="author produto-detail" itemprop="author" itemscope
+			<section class="author produto-detail" itemprop="author"
 				itemtype="http://schema.org/Person">
 				<h2 class="section-title" itemprop="name">${produto.titulo}</h2>
 				<span itemprop="description">

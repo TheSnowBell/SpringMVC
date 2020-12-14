@@ -15,7 +15,7 @@ import loja.models.ItemDeCompra;
 import loja.models.Produto;
 
 @Controller
-@RequestMapping("/shopping")
+@RequestMapping("/carrinhoDeCompra")
 @Scope(value =  WebApplicationContext.SCOPE_REQUEST)
 public class CarrinhoDeCompraController {
 	
@@ -36,6 +36,11 @@ public class CarrinhoDeCompraController {
 		Produto produto = produtoDAO.find(produtoId);
 		ItemDeCompra itemDeCompra = new ItemDeCompra(produto, bookType);
 		return itemDeCompra;
+	}
+	
+	@RequestMapping(method = RequestMethod.GET)
+	public String itens() {
+		return "carrinhoDeCompras/itens";
 	}
 
 }

@@ -19,6 +19,18 @@ public class CarrinhoDeCompra {
 		itens.put(item, getQuantidadeDoItem(item) + 1);
 	}
 
+	public void remover(ItemDeCompra ItemDeCompra) {
+		itens.remove(ItemDeCompra);
+	}
+
+	public boolean isEmpty() {
+		return itens.isEmpty();
+	}
+
+	public Collection<ItemDeCompra> getList() {
+		return itens.keySet();
+	}
+	
 	public Integer getQuantidadeDoItem(ItemDeCompra item) {
 		if (!itens.containsKey(item)) {
 			itens.put(item, 0);
@@ -31,10 +43,6 @@ public class CarrinhoDeCompra {
 				.reduce(0, (subTotal, valor) -> subTotal + valor);
 	}
 
-	public Collection<ItemDeCompra> getList() {
-		return itens.keySet();
-	}
-
 	public BigDecimal getValorTotalDoItem(ItemDeCompra item) {
 		return item.getValorTotal(getQuantidadeDoItem(item));
 	}
@@ -45,14 +53,6 @@ public class CarrinhoDeCompra {
 			total = total.add(getValorTotalDoItem(item));
 		}
 		return total;
-	}
-
-	public void remove(ItemDeCompra ItemDeCompra) {
-		itens.remove(ItemDeCompra);
-	}
-
-	public boolean isEmpty() {
-		return itens.isEmpty();
 	}
 
 }
