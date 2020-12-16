@@ -13,7 +13,7 @@
 <body>
 
 
-	<form:form 	action="${spring:mvcUrl('PC#cadastrar').build()}" 
+	<form:form action="${spring:mvcUrl('PC#cadastrar').build()}" 
 			 	method="post" 
 			 	commandName="produto" 
 			 	enctype="multipart/form-data">
