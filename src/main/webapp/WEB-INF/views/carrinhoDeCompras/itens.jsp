@@ -3,14 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert titulo here</title>
-</head>
-<body>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
+<customTags:pageTemplate bodyClass="" title="Itens">
 
 	<table id="cart-table">
 		<thead>
@@ -50,5 +45,4 @@
 			</tr>
 		</tfoot>
 	</table>
-</body>
-</html>
+</customTags:pageTemplate>

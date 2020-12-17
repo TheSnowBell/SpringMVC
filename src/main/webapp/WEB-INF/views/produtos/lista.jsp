@@ -3,13 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
+
+<customTags:pageTemplate bodyClass="" title="Listar">
+
 	${sucesso}
 	<security:authorize access="isAuthenticated()">
 		<security:authentication property="principal" var="user" />
@@ -33,5 +30,4 @@
 			</tr>
 		</c:forEach>
 	</table>
-</body>
-</html>
+</customTags:pageTemplate>

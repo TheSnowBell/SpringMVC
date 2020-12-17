@@ -1,18 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib  prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
-<!DOCTYPE html>
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Cadastro de produtos</title>
-</head>
-<body>
-
-
+<customTags:pageTemplate bodyClass="" title="Cadastro">
 	<form:form action="${spring:mvcUrl('PC#cadastrar').build()}" 
 			 	method="post" 
 			 	commandName="produto" 
@@ -60,5 +53,4 @@
 		</div>
 
 	</form:form>
-</body>
-</html>
+</customTags:pageTemplate>
