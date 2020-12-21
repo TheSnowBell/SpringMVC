@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 	<form action="produtos/formulario">
 
 		<div>
-			<input type="submit" value="Enviar">
+			<spring:message code="formulario.submit" var="submit" />
+			<input type="submit" value="${submit}">
 		</div>
 
 	</form>

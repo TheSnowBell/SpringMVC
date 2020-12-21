@@ -10,12 +10,12 @@
 	${sucesso}
 	<security:authorize access="isAuthenticated()">
 		<security:authentication property="principal" var="user" />
-		<div>Olá ${user.nome}</div>
+		<div> <spring:message code="user.welcome" arguments="${user.nome}"/> </div>
 	</security:authorize>
 	<table>
 		<tr>
-			<td>Titulo</td>
-			<td>Valores</td>
+			<td><spring:message code="titulo" /></td>
+			<td><spring:message code="valores" /></td>
 		</tr>
 		<c:forEach items="${produtos}" var="produto">
 			<tr>

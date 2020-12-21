@@ -3,6 +3,7 @@ package loja.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.WebApplicationContext;
@@ -32,7 +33,7 @@ public class CarrinhoDeCompraController {
 		return new ModelAndView("redirect:/produtos");
 	}
 	
-	private ItemDeCompra criarItem(Integer produtoId, BookType bookType) {
+	private ItemDeCompra criarItem(@PathVariable("produtoId") Integer produtoId, @PathVariable("bookType") BookType bookType) {
 		Produto produto = produtoDAO.find(produtoId);
 		ItemDeCompra itemDeCompra = new ItemDeCompra(produto, bookType);
 		return itemDeCompra;

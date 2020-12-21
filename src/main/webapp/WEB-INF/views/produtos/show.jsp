@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib tagdir="/WEB-INF/tags" prefix="customTags"%>
 
 <customTags:pageTemplate bodyClass="" title="Mostrar">
@@ -14,8 +13,7 @@
 				<nav id="main-nav">
 					<ul>
 
-						<li><a href="" rel="nofollow">Seu carrinho
-								(${carrinhoDeCompra.quantidadeTotalDeItensNoCarrinho}) </a></li>
+						<li><a href="${spring:mvcUrl('CDCC#itens').build()}" rel="nofollow"> <spring:message code="carrinho" arguments="${carrinhoDeCompra.quantidadeTotalDeItensNoCarrinho}" /> </a></li>
 
 					</ul>
 				</nav>
@@ -41,9 +39,9 @@
 			</div>
 		</header>
 
-
 		<section>
-			<form action="<c:url value="/shopping"/>" method="post">
+			<form:form servletRelativeAction="/carrinhoDeCompra"  >
+
 				<input type="hidden" value="${produto.id}" name="produtoId" />
 				<ul id="variants">
 					<c:forEach items="${produto.precos}" var="preco">
@@ -56,11 +54,12 @@
 					</c:forEach>
 
 				</ul>
+				
+					<spring:message code="show.submit" var="submit" />
+					<input name="submit" type="submit" alt="Compre agora"
+					title="Compre agora '${produto.titulo}'!" value="${submit}" />
 
-				<input type="submit" alt="Compre agora"
-					title="Compre agora '${produto.titulo}'!" value="comprar" />
-			</form>
-
+			</form:form>
 		</section>
 
 		<div class="container">
@@ -71,9 +70,9 @@
 			</section>
 
 			<section>
-				<h2>Dados do livro:</h2>
+				<h2> <spring:message code="dadosLivro" /> </h2>
 				<p>
-					Número de paginas: <span itemprop="numberOfPages">${produto.paginas}</span>
+					<spring:message code="paginas" /> <span itemprop="numberOfPages">${produto.paginas}</span>
 				</p>
 
 				<p></p>

@@ -11,10 +11,10 @@
 		<thead>
 			<tr>
 				<th></th>
-				<th>Item</th>
-				<th>Preço</th>
-				<th>Quantidade</th>
-				<th>Total</th>
+				<th><spring:message code="item" /></th>
+				<th><spring:message code="preco" /></th>
+				<th><spring:message code="quantidade" /></th>
+				<th><spring:message code="total" /></th>
 				<th></th>
 			</tr>
 		</thead>
@@ -35,10 +35,11 @@
 		<tfoot>
 			<tr>
 				<td colspan="2">
-					<form action="${spring:mvcUrl('PC#checkout').build()}"
+					<form:form action="${spring:mvcUrl('PC#checkout').build()}"
 						method="post">
-						<input type="submit" name="checkout" value="Finalizar compra" id="checkout" />
-					</form>
+						<spring:message code="itens.submit" var="submit" />
+						<input type="submit" name="checkout" value="${submit}" id="checkout" />
+					</form:form>
 				</td>
 				<td>${carrinhoDeCompra.total}</td>
 				<td></td>
