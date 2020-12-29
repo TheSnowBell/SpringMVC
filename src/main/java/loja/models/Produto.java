@@ -1,6 +1,7 @@
 package loja.models;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Produto {
 	private int paginas;
 
 	@ElementCollection
-	private List<Preco> precos;
+	private List<Preco> precos = new ArrayList<>();
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Calendar dataLancamento;
